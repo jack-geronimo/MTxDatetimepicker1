@@ -1,48 +1,50 @@
 <mat-card>
-  
-    <mat-card-content>
-  
-        <mat-toolbar class="mat-card-title" color="primary">
-        {{ fornCardTitle }}
-        </mat-toolbar>
+  <mat-card-content>
+    <mat-toolbar class="mat-card-title" color="primary">DateTimePicker</mat-toolbar>
 
-        <form [formGroup]="demoFormGroup" (ngSubmit)="onFormSubmit($event)">
-            <mat-form-field class="full-width">
-                <mat-label>{{ input1Label }}</mat-label>
-                <input
-                matInput
-                placeholder="{{ input1Placeholder }}"
-                formControlName="{{ input1ControlNane }}"
-                />
-            </mat-form-field>
+    <form [formGroup]="formGroup" (ngSubmit)="onFormSubmit($event)">
+      <mat-form-field class="full-width">
+        <mat-label>Firstname</mat-label>
+        <input matInput formControlName="firstName"
+        />
+      </mat-form-field>
 
-            <!--  For @ng-matero/extensions@16.2.0  DateTimePicker   -->
-            <mat-form-field class="full-width"> 
-                <input
-                    matInput
-                    [mtxDatetimepicker]="datetimePicker"
-                    formControlName="{{ dt1ControlName }}"
-                />
+      <!--  For @ng-matero/extensions@16.2.0  DateTimePicker   -->
+      <mat-form-field class="full-width">
+        <mat-label>Birthday</mat-label>
+        <input formControlName="dtPicker" matInput [mtxDatetimepicker]="datetimePicker" />
+        <mtx-datetimepicker type="datetime" #datetimePicker
+          [type]="mtxType"
+          [multiYearSelector]="true"
+          [timeInterval]="1"
+          [mode]="'portrait'"
+        >
+          <mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button (click)="datetimePicker.close()">Ok</button>
+          </mat-dialog-actions>
+        </mtx-datetimepicker>
 
-                <mtx-datetimepicker #datetimePicker [type]="mtxType">
-                </mtx-datetimepicker>
+        <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix>
+        </mtx-datetimepicker-toggle>
+      </mat-form-field>
 
-                <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix>
-                </mtx-datetimepicker-toggle>
-            </mat-form-field>
-            <!-- --------------------------------------------------------->
+      <mat-card-footer>
+        <mat-card-actions>
+          <button mat-raised-button type="submit" color="accent">Save</button>
+        </mat-card-actions>
+      </mat-card-footer>
 
-            <mat-card-footer>
-                <mat-card-actions>
-                <button mat-raised-button type="submit" color="accent">
-                    {{ submitButtomText }}
-                </button>
-                </mat-card-actions>
-            </mat-card-footer>
-        
-        </form>
-  
-    </mat-card-content>
-    
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="formGroup.get('firstName')?.value && formGroup.get('dtPicker')?.value" style="text-align: center; width: 100%;">
+  <mat-card-content>
+  <span>
+    {{formGroup.get('firstName')?.value}} hat am
+    <br>{{formGroup.get('dtPicker')?.value}}<br>
+    Geburtstag</span>
+  </mat-card-content>
 </mat-card>
 
