@@ -1,23 +1,15 @@
 <mat-card>
   <mat-card-content>
-    <mat-toolbar class="mat-card-title" color="primary">DateTimePicker</mat-toolbar>
-
+    <mat-toolbar class="mat-card-title" color="primary"><div>DateTimePicker</div><div></div></mat-toolbar>
     <form [formGroup]="formGroup" (ngSubmit)="onFormSubmit($event)">
       <mat-form-field class="full-width">
-        <mat-label>Firstname</mat-label>
-        <input matInput formControlName="firstName"
-        />
-      </mat-form-field>
-
-      <!--  For @ng-matero/extensions@16.2.0  DateTimePicker   -->
-      <mat-form-field class="full-width">
-        <mat-label>Birthday</mat-label>
-        <input formControlName="dtPicker" matInput [mtxDatetimepicker]="datetimePicker" />
+        <mat-label>Start date</mat-label>
+        <input formControlName="startDate" matInput [mtxDatetimepicker]="datetimePicker" (dateChange)="sendStartDate()"/>
         <mtx-datetimepicker type="datetime" #datetimePicker
-          [type]="mtxType"
-          [multiYearSelector]="true"
-          [timeInterval]="1"
-          [mode]="'portrait'"
+                            [type]="'datetime'"
+                            [multiYearSelector]="true"
+                            [timeInterval]="1"
+                            [mode]="'portrait'"
         >
           <mat-dialog-actions>
             <button mat-button mat-dialog-close>Cancel</button>
@@ -31,20 +23,16 @@
 
       <mat-card-footer>
         <mat-card-actions>
-          <button mat-raised-button type="submit" color="accent">Save</button>
+          <button mat-raised-button type="submit" color="accent" style="margin-right: 8px;">Save</button>
+          <button mat-raised-button [color]="currentLocale === 'de-DE' ? 'primary' : 'accent'" (click)="switchToGerman()" style="margin-right: 8px;">German</button>
+          <button mat-raised-button [color]="currentLocale === 'en-US' ? 'primary' : 'accent'" (click)="switchToEnglish()" style="margin-right: 8px;"> US </button>
+          <button mat-raised-button [color]="currentLocale === 'fr-FR' ? 'primary' : 'accent'" (click)="switchToFrench()" style="margin-right: 8px;">French</button>
+          <button mat-raised-button [color]="currentLocale === 'en-GB' ? 'primary' : 'accent'" (click)="switchToBritishEnglish()" color="accent"> UK </button>
         </mat-card-actions>
       </mat-card-footer>
-
     </form>
   </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="formGroup.get('firstName')?.value && formGroup.get('dtPicker')?.value" style="text-align: center; width: 100%;">
-  <mat-card-content>
-  <span>
-    {{formGroup.get('firstName')?.value}} hat am
-    <br>{{formGroup.get('dtPicker')?.value}}<br>
-    Geburtstag</span>
-  </mat-card-content>
-</mat-card>
-
+<app-data>
+</app-data>

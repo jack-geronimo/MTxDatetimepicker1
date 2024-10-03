@@ -1,86 +1,93 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
-import {MTX_DATETIME_FORMATS} from '@ng-matero/extensions/core';
-import {MtxDatetimepickerType} from '@ng-matero/extensions/datetimepicker';
-import {DateAdapter} from '@angular/material/core';
-import {de, enGB, enUS} from 'date-fns/locale';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
+import { de, fr, enGB, enUS } from 'date-fns/locale';
+import { LanguageService } from '../service/LanguageService';
+import { CommunicationService } from '../service/communication.service';
 
 @Component({
   selector: 'app-form1',
   templateUrl: './form1.component.html',
   styleUrls: ['./form1.component.scss'],
-  providers: [
-    {
-      provide: MTX_DATETIME_FORMATS,
-      useValue: {
-        parse: {
-          dateInput: 'dd.LL.yyyy',
-          monthInput: 'LLLL',
-          yearInput: 'yyyy',
-          datetimeInput: 'dd.LL.yyyy HH:mm',
-          timeInput: 'HH:mm',
-        },
-        display: {
-          dateInput: 'dd.LL.yyyy',
-          monthInput: 'LLLL',
-          yearInput: 'yyyy',
-          datetimeInput: 'dd.LL.yyyy HH:mm',
-          timeInput: 'HH:mm:ss',
-          monthYearLabel: 'yyyy',
-          dateA11yLabel: 'DDD',
-          monthYearA11yLabel: 'LLLL yyyy',
-          popupHeaderDateLabel: 'dd LLL, ccc',
-        },
-      },
-    },
-  ],
 })
-
-export class Form1Component {
-  @ViewChild('infoDiv') infoDiv!: ElementRef;
+export class Form1Component implements OnInit {
   formGroup: UntypedFormGroup;
-  firstNameInput: string | null = null;
-  birthdayInput: Date | null = null;
-  mtxType!: MtxDatetimepickerType
+  currentLocale: string | undefined;
 
   constructor(
     fbGroup: UntypedFormBuilder,
     private dateAdapter: DateAdapter<any>,
+    private languageService: LanguageService,
+    private communicationService: CommunicationService,
   ) {
     this.formGroup = fbGroup.group({
-      firstName: [''],
-      dtPicker: [''],
+      startDate: [null as Date | null],
     });
-  };
+  }
 
   ngOnInit(): void {
-    this.setDtLocale(navigator.language);
+    this.languageService.currentLocale$.subscribe(locale => {
+      this.setDtLocale(locale);
+      this.currentLocale = locale; // Ensure currentLocale is updated
+      const startDate = this.formGroup.get('startDate')?.value;
+      this.formGroup.get('startDate')?.setValue(startDate);
+    });
+
+    this.communicationService.currentMessage.subscribe(date => {
+      this.formGroup.get('startDate')?.setValue(date);
+    });
   }
 
   setDtLocale(locale: string): void {
-
     switch (locale) {
-      case "en-US":
+      case 'en-US':
         this.dateAdapter.setLocale(enUS);
+        this.dateAdapter.setLocale({ ...enUS, formatLong: {
+            date: () => 'MM/dd/yyyy',
+            time: () => 'HH:mm',
+            dateTime: () => 'MM/dd/yyyy HH:mm'
+          }});
         break;
-      case "en-GB":
+      case 'en-GB':
         this.dateAdapter.setLocale(enGB);
         break;
-      case "de-DE":
+      case 'fr-FR':
+        this.dateAdapter.setLocale(fr);
+        break;
+      case 'de-DE':
         this.dateAdapter.setLocale(de);
         break;
       default:
-        this.dateAdapter.setLocale(de);
+        this.dateAdapter.setLocale(fr);
         break;
     }
-    //    this.dateAdapter.setLocale(locale);
   }
 
   onFormSubmit(event: Event): void {
-
     console.log('Form Submitted', this.formGroup.value);
+    console.log('current language', this.languageService.getCurrentLocale());
+  }
 
-    this.firstNameInput = this.formGroup.get('firstName')?.value;
-    this.birthdayInput = this.formGroup.get('dtPicker')?.value;
+  switchToGerman() {
+    this.languageService.setLocale('de-DE');
+  }
+
+  switchToEnglish() {
+    this.languageService.setLocale('en-US');
+  }
+
+  switchToFrench() {
+    this.languageService.setLocale('fr-FR');
+  }
+
+  switchToBritishEnglish() {
+    this.languageService.setLocale('en-GB');
+  }
+
+  sendStartDate() {
+    const startDate = this.formGroup.get('startDate')?.value;
+    if (startDate) {
+      this.communicationService.setDate(startDate);
+    }
   }
 }
