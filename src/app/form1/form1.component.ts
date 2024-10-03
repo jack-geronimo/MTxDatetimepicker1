@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { de, fr, enGB, enUS } from 'date-fns/locale';
@@ -63,7 +63,7 @@ export class Form1Component implements OnInit {
     }
   }
 
-  onFormSubmit(event: Event): void {
+  onFormSubmit(): void {
     console.log('Form Submitted', this.formGroup.value);
     console.log('current language', this.languageService.getCurrentLocale());
   }

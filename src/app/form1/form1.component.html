@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <mat-toolbar class="mat-card-title" color="primary"><div>DateTimePicker</div><div></div></mat-toolbar>
-    <form [formGroup]="formGroup" (ngSubmit)="onFormSubmit($event)">
+    <form [formGroup]="formGroup" (ngSubmit)="onFormSubmit()">
       <mat-form-field class="full-width">
         <mat-label>Start date</mat-label>
         <input formControlName="startDate" matInput [mtxDatetimepicker]="datetimePicker" (dateChange)="sendStartDate()"/>
