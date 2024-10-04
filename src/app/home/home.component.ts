@@ -5,11 +5,6 @@ import {Component} from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-
-  appHeaderTitle: string = "DATEPICKER DEMO (C) NG-MATERO";
-  myInfo: string = " (C) 2024 Hans Pickelmann "
-
-}
+export class HomeComponent {}
 
 
