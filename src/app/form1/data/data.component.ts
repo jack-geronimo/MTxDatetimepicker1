@@ -14,8 +14,8 @@ export class DataComponent implements OnInit {
   currentLocale: string | undefined;
 
   constructor(
-    private languageService: LanguageService,
-    private communicationService: CommunicationService) {
+    private readonly languageService: LanguageService,
+    private readonly communicationService: CommunicationService) {
   }
 
   ngOnInit() {
