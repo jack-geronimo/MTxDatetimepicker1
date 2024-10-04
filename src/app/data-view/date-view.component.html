@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar class="mat-card-title" color="primary">
+      <div>Selected Values</div>
+    </mat-toolbar>
+    <span style="text-align: left; display: block;">Start-Date: {{ startDate ? (startDate | localizedDate) : 'N/A' }}</span>
+    <span style="text-align: left; display: block;">Current local: {{ currentLocale }}</span>
+    <button mat-button (click)="setCurrentDate()" color="accent">Set current Date</button>
+    <button mat-button (click)="clearDate()" color="accent">Clear Date</button>
+  </mat-card-content>
+</mat-card>
