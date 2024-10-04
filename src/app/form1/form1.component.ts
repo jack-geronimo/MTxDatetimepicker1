@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { DateAdapter } from '@angular/material/core';
+import {Component, OnInit} from '@angular/core';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
+import {DateAdapter} from '@angular/material/core';
 import { de, fr, enGB, enUS } from 'date-fns/locale';
-import { LanguageService } from '../service/LanguageService';
-import { CommunicationService } from '../service/communication.service';
+import {LanguageService} from '../service/LanguageService';
+import {CommunicationService} from '../service/communication.service';
 
 @Component({
   selector: 'app-form1',
@@ -16,9 +16,9 @@ export class Form1Component implements OnInit {
 
   constructor(
     fbGroup: UntypedFormBuilder,
-    private dateAdapter: DateAdapter<any>,
-    private languageService: LanguageService,
-    private communicationService: CommunicationService,
+    private readonly dateAdapter: DateAdapter<any>,
+    private readonly languageService: LanguageService,
+    private readonly communicationService: CommunicationService,
   ) {
     this.formGroup = fbGroup.group({
       startDate: [null as Date | null],
@@ -26,9 +26,11 @@ export class Form1Component implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.languageService.currentLocale$.subscribe(locale => {
+      this.currentLocale = locale
       this.setDtLocale(locale);
-      this.currentLocale = locale; // Ensure currentLocale is updated
+      console.log('Current Locale:', this.currentLocale);
       const startDate = this.formGroup.get('startDate')?.value;
       this.formGroup.get('startDate')?.setValue(startDate);
     });
@@ -42,11 +44,13 @@ export class Form1Component implements OnInit {
     switch (locale) {
       case 'en-US':
         this.dateAdapter.setLocale(enUS);
-        this.dateAdapter.setLocale({ ...enUS, formatLong: {
+        this.dateAdapter.setLocale({
+          ...enUS, formatLong: {
             date: () => 'MM/dd/yyyy',
             time: () => 'HH:mm',
             dateTime: () => 'MM/dd/yyyy HH:mm'
-          }});
+          }
+        });
         break;
       case 'en-GB':
         this.dateAdapter.setLocale(enGB);
@@ -63,25 +67,8 @@ export class Form1Component implements OnInit {
     }
   }
 
-  onFormSubmit(): void {
-    console.log('Form Submitted', this.formGroup.value);
-    console.log('current language', this.languageService.getCurrentLocale());
-  }
-
-  switchToGerman() {
-    this.languageService.setLocale('de-DE');
-  }
-
-  switchToEnglish() {
-    this.languageService.setLocale('en-US');
-  }
-
-  switchToFrench() {
-    this.languageService.setLocale('fr-FR');
-  }
-
-  switchToBritishEnglish() {
-    this.languageService.setLocale('en-GB');
+  switchLocale(locale: string) {
+    this.languageService.setLocale(locale);
   }
 
   sendStartDate() {
@@ -89,5 +76,14 @@ export class Form1Component implements OnInit {
     if (startDate) {
       this.communicationService.setDate(startDate);
     }
+  }
+
+  getButtonColor(locale: string): string {
+    return this.currentLocale === locale ? 'primary' : 'accent';
+  }
+
+  onFormSubmit(): void {
+    console.log('Form Submitted', this.formGroup.value);
+    console.log('current language', this.languageService.getCurrentLocale());
   }
 }
