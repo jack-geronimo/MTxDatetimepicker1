@@ -6,7 +6,7 @@ import {LanguageService} from '../service/LanguageService';
 import {CommunicationService} from '../service/communication.service';
 
 @Component({
-  selector: 'app-form1',
+  selector: 'app-datepicker-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
