@@ -10,7 +10,7 @@ import {CommunicationService} from "../../service/communication.service";
 
 export class DataComponent implements OnInit {
 
-  startDate: Date | null | undefined;
+  startDate: Date | null = null;
   currentLocale: string | undefined;
 
   constructor(
@@ -23,17 +23,9 @@ export class DataComponent implements OnInit {
       this.currentLocale = locale;
     });
 
-    this.communicationService.currentMessage.subscribe((date: Date | null) => {
+    this.communicationService.currentDate.subscribe((date: Date | null) => {
       this.startDate = date;
     });
-
-    if (!this.startDate) {
-      this.startDate = new Date();
-    }
-
-    if (!this.startDate) {
-      this.startDate = new Date();
-    }
   }
 
   setCurrentDate() {

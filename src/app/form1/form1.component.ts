@@ -35,7 +35,7 @@ export class Form1Component implements OnInit {
       this.formGroup.get('startDate')?.setValue(startDate);
     });
 
-    this.communicationService.currentMessage.subscribe(date => {
+    this.communicationService.currentDate.subscribe(date => {
       this.formGroup.get('startDate')?.setValue(date);
     });
   }

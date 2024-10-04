@@ -5,10 +5,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunicationService {
-  private messageSource = new Subject<Date | null>();
-  currentMessage = this.messageSource.asObservable();
+  private readonly dateSource = new Subject<Date | null>();
+  public currentDate = this.dateSource.asObservable();
 
-  setDate(message: Date | null) {
-    this.messageSource.next(message);
+  setDate(date: Date | null) {
+    this.dateSource.next(date);
   }
 }
