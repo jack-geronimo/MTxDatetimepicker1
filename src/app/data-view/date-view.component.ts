@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {LanguageService} from "../../service/LanguageService";
-import {CommunicationService} from "../../service/communication.service";
+import {LanguageService} from "../service/LanguageService";
+import {CommunicationService} from "../service/communication.service";
 
 @Component({
   selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrl: './data.component.scss'
+  templateUrl: './date-view.component.html',
+  styleUrl: './date-view.component.scss'
 })
 
-export class DataComponent implements OnInit {
+export class DateViewComponent implements OnInit {
 
   startDate: Date | null = null;
   currentLocale: string | undefined;

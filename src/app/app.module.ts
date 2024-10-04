@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {HomeComponent} from './home/home.component';
 import {FormComponent} from './datetimepicker/form.component';
-import {DataComponent} from './datetimepicker/data/data.component';
+import {DateViewComponent} from './data-view/date-view.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
 import {LanguageService} from './service/LanguageService';
@@ -28,7 +28,7 @@ registerLocaleData(localeEn);
     AppComponent,
     HomeComponent,
     FormComponent,
-    DataComponent,
+    DateViewComponent,
     LocalizedDatePipe,
     LocaleButtonColorPipe
 
