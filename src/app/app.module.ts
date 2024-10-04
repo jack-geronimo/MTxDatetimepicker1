@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {HomeComponent} from './home/home.component';
-import {Form1Component} from './form1/form1.component';
+import {FormComponent} from './form1/form.component';
 import {DataComponent} from './form1/data/data.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
@@ -27,7 +27,7 @@ registerLocaleData(localeEn);
   declarations: [
     AppComponent,
     HomeComponent,
-    Form1Component,
+    FormComponent,
     DataComponent,
     LocalizedDatePipe,
     LocaleButtonColorPipe
