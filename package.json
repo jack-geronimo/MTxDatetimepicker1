@@ -23,7 +23,7 @@
     "@angular/router": "^17.3.12",
     "@ng-matero/extensions": "^17.3.6",
     "@ng-matero/extensions-date-fns-adapter": "^17.1.2",
-    "@ng-matero/": "^17.1.2",
+    "material-design-icons": "^3.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
