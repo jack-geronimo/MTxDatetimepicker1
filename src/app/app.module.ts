@@ -7,8 +7,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {HomeComponent} from './home/home.component';
-import {FormComponent} from './form1/form.component';
-import {DataComponent} from './form1/data/data.component';
+import {FormComponent} from './datetimepicker/form.component';
+import {DataComponent} from './datetimepicker/data/data.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
 import {LanguageService} from './service/LanguageService';
