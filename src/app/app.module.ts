@@ -11,6 +11,7 @@ import {FormComponent} from './datetimepicker/form.component';
 import {DateViewComponent} from './data-view/date-view.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
+import { ChangelogService } from './service/changelog.service';
 import {LanguageService} from './service/LanguageService';
 import { LocalizedDatePipe } from './shared/localized-date.pipe';
 import { LocaleButtonColorPipe } from './shared/locale-button-color.pipe';
@@ -18,6 +19,8 @@ import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeFr from '@angular/common/locales/fr';
 import localeEn from '@angular/common/locales/en';
+import {HttpClientModule} from "@angular/common/http";
+import { MatExpansionModule } from '@angular/material/expansion';
 
 registerLocaleData(localeDe);
 registerLocaleData(localeFr);
@@ -40,8 +43,11 @@ registerLocaleData(localeEn);
     MaterialModule,
     ReactiveFormsModule,
     MatDialogModule,
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [
+    ChangelogService,
     {
       provide: MAT_DATE_LOCALE,
       useFactory: (languageService: LanguageService) => languageService.getCurrentLocale(),

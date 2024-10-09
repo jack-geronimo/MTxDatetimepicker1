@@ -1,12 +1,16 @@
-
 <mat-toolbar class="toolbar-height" color="primary">
-    <mat-toolbar-row >
-          <a class="font-size2" mat-button routerLink="/">
-            <mat-icon class="icon">home</mat-icon>
-            DATEPICKER DEMO (C) NG-MATERO
-          </a>
-          <span class="toolbar-item-spacer"></span>
+  <mat-toolbar-row>
+    <a class="font-size2" mat-button routerLink="/">
+      <mat-icon class="icon">home</mat-icon>DATEPICKER DEMO (C) NG-MATERO
+    </a>
+    <span class="toolbar-item-spacer"></span>
+    <div class="font-size3">Handcrafted with <b>love and passion</b> from Bavaria. ❤️</div>
+  </mat-toolbar-row>
 
-      <div class="font-size3">Handcrafted with <b>love and passion</b> from Bavaria. ❤️ </div>
-    </mat-toolbar-row>
+  <mat-toolbar-row>
+    <a class="font-size1" mat-button style="margin-left:auto;" (click)="openChangelogDialog()">
+      <mat-icon class="icon">update</mat-icon>
+      v1.0.0
+    </a>
+  </mat-toolbar-row>
 </mat-toolbar>
