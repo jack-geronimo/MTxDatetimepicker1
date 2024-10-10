@@ -21,6 +21,7 @@ import localeFr from '@angular/common/locales/fr';
 import localeEn from '@angular/common/locales/en';
 import {HttpClientModule} from "@angular/common/http";
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FooterComponent } from './footer/footer.component';
 
 registerLocaleData(localeDe);
 registerLocaleData(localeFr);
@@ -32,10 +33,12 @@ registerLocaleData(localeEn);
     HomeComponent,
     FormComponent,
     DateViewComponent,
+    FooterComponent,
     LocalizedDatePipe,
     LocaleButtonColorPipe
 
   ],
+  exports: [DateViewComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -59,7 +62,7 @@ registerLocaleData(localeEn);
       deps: [LanguageService]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, DateViewComponent, FooterComponent]
 })
 export class AppModule {
 }
