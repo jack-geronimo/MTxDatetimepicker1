@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import { ChangelogService } from '../service/changelog.service';
 import { CommonModule } from '@angular/common';
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelHeader} from "@angular/material/expansion";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-changelog',
@@ -17,7 +18,9 @@ import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPan
     MatAccordion,
     MatExpansionPanel,
     MatExpansionPanelTitle,
-    MatExpansionPanelHeader
+    MatExpansionPanelHeader,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './changelog.component.html',
   styleUrls: ['./changelog.component.scss']

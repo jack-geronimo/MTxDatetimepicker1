@@ -9,7 +9,7 @@ import { ChangelogComponent } from '../changelog/changelog.component';
 })
 export class HomeComponent {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog) { }
 
   openChangelogDialog(): void {
     this.dialog.open(ChangelogComponent);
