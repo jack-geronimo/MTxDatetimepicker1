@@ -7,9 +7,6 @@
     <span style="text-align: left; display: block;">Current local: {{ currentLocale }}</span>
     <button mat-button (click)="setCurrentDate()" color="accent">Set current Datetime</button>
     <button mat-button (click)="clearDate()" color="accent">Clear Date</button>
-    <button mat-button (click)="togglePickerType()" color="accent">
-      {{ showTime ? 'Ohne Uhrzeit anzeigen' : 'Mit Uhrzeit anzeigen' }}
-    </button>
 
     <mat-button-toggle-group [hideSingleSelectionIndicator]="true" class="rounded-toggle-group" [(value)]="showTime" (change)="togglePickerType()">
       <mat-button-toggle [value]="false" class="rounded-toggle">

@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {DateAdapter} from '@angular/material/core';
-import { de, fr, enGB, enUS } from 'date-fns/locale';
-import {LanguageService} from '../service/LanguageService';
+import {de, enGB, enUS, fr} from 'date-fns/locale';
 import {CommunicationService} from '../service/communication.service';
+import {LanguageService} from '../service/LanguageService';
 
 @Component({
   selector: 'app-datepicker-form',
@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   pickerType: 'date' | 'datetime' = 'datetime';
   formGroup: UntypedFormGroup;
   currentLocale: string | undefined;
+  showTime: boolean = true;
 
   constructor(
     fbGroup: UntypedFormBuilder,
@@ -27,6 +28,10 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.communicationService.pickerType$.subscribe((pickerTye: 'date' | 'datetime') => {
+      this.showTime = pickerTye === 'datetime';
+    });
 
     this.languageService.currentLocale$.subscribe(locale => {
       this.currentLocale = locale
@@ -58,10 +63,11 @@ export class FormComponent implements OnInit {
   setDtLocale(locale: string): void {
     switch (locale) {
       case 'en-US':
-        this.dateAdapter.setLocale(enUS);
-        //TODO: explain why this was inserted special for enUS
+        // Set the locale for the date adapter with custom date, time and dateTime formats
+        // for the enUS as we want to use the 24h format for enUS as well.
         this.dateAdapter.setLocale({
-          ...enUS, formatLong: {
+          ...enUS,
+          formatLong: {
             date: () => 'MM/dd/yyyy',
             time: () => 'HH:mm',
             dateTime: () => 'MM/dd/yyyy HH:mm'
