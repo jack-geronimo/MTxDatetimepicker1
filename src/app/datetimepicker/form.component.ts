@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {DateAdapter} from '@angular/material/core';
 import { de, fr, enGB, enUS } from 'date-fns/locale';
@@ -20,7 +20,6 @@ export class FormComponent implements OnInit {
     private readonly dateAdapter: DateAdapter<any>,
     private readonly languageService: LanguageService,
     private readonly communicationService: CommunicationService,
-    private readonly cdr: ChangeDetectorRef,
   ) {
     this.formGroup = fbGroup.group({
       startDate: [null as Date | null],
@@ -93,10 +92,6 @@ export class FormComponent implements OnInit {
     if (startDate) {
       this.communicationService.setDate(startDate);
     }
-  }
-
-  getButtonColor(locale: string): string {
-    return this.currentLocale === locale ? 'primary' : 'accent';
   }
 
   onFormSubmit(): void {
