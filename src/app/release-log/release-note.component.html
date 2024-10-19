@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>
+  Release Notes
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+</h1>
+<div mat-dialog-content>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let section of (changelog ? changelog.split('<h2>').slice(1) : []); let i = index"
+                         [expanded]="i === 0">
+      <mat-expansion-panel-header style="background-color: #e8e8e8;">
+        <mat-panel-title class="mat-panel-title">
+          <div [innerHTML]="section.split('</h2>')[0]"></div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="release-node-content" [innerHTML]="section.split('</h2>').slice(1).join('')"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end; margin: 10px 15px 10px">
+  <button mat-raised-button mat-button [mat-dialog-close]="true" style="background-color: #e8e8e8;">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>Close
+  </button>
+</div>

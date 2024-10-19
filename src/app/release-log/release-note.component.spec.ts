@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangelogComponent } from './changelog.component';
+import { ReleaseNoteComponent } from './release-note.component';
 import { ChangelogService } from '../service/changelog.service';
 import { of } from 'rxjs';
 
 describe('ChangelogComponent', () => {
-  let component: ChangelogComponent;
-  let fixture: ComponentFixture<ChangelogComponent>;
+  let component: ReleaseNoteComponent;
+  let fixture: ComponentFixture<ReleaseNoteComponent>;
   let changelogService: ChangelogService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, ChangelogComponent],
+      imports: [HttpClientTestingModule, MatDialogModule, ReleaseNoteComponent],
       providers: [
         ChangelogService,
         { provide: MatDialogRef, useValue: {} },
@@ -21,7 +21,7 @@ describe('ChangelogComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChangelogComponent);
+    fixture = TestBed.createComponent(ReleaseNoteComponent);
     component = fixture.componentInstance;
     changelogService = TestBed.inject(ChangelogService);
 

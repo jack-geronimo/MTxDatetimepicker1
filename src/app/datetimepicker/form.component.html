@@ -6,7 +6,7 @@
         <mat-label>Select a start date</mat-label>
         <input formControlName="startDate" matInput [mtxDatetimepicker]="datetimePicker" (dateChange)="sendStartDate()"/>
         <mtx-datetimepicker type="datetime" #datetimePicker
-                            [type]="'datetime'"
+                            [type]="pickerType"
                             [timeInput]="true"
                             [multiYearSelector]="true"
                             [timeInterval]="1"

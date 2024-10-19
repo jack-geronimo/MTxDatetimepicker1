@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {DateAdapter} from '@angular/material/core';
 import { de, fr, enGB, enUS } from 'date-fns/locale';
@@ -11,6 +11,7 @@ import {CommunicationService} from '../service/communication.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  pickerType: 'date' | 'datetime' = 'datetime';
   formGroup: UntypedFormGroup;
   currentLocale: string | undefined;
 
@@ -19,6 +20,7 @@ export class FormComponent implements OnInit {
     private readonly dateAdapter: DateAdapter<any>,
     private readonly languageService: LanguageService,
     private readonly communicationService: CommunicationService,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.formGroup = fbGroup.group({
       startDate: [null as Date | null],
@@ -38,12 +40,27 @@ export class FormComponent implements OnInit {
     this.communicationService.currentDate.subscribe(date => {
       this.formGroup.get('startDate')?.setValue(date);
     });
+
+    this.communicationService.pickerType$.subscribe((pickerType) => {
+      this.pickerType = pickerType;
+      const startDate = this.formGroup.get('startDate')?.value;
+      if (startDate) {
+        setTimeout(() => {
+          const inputElement = document.querySelector('input[formControlName="startDate"]') as HTMLInputElement;
+          if (inputElement) {
+            inputElement.focus();
+            inputElement.blur();
+          }
+        }, 0);
+      }
+    });
   }
 
   setDtLocale(locale: string): void {
     switch (locale) {
       case 'en-US':
         this.dateAdapter.setLocale(enUS);
+        //TODO: explain why this was inserted special for enUS
         this.dateAdapter.setLocale({
           ...enUS, formatLong: {
             date: () => 'MM/dd/yyyy',

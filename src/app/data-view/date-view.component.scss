@@ -1,1 +1,23 @@
-@import 'src/app/shared/styles/common-styles';
+@import '../shared/styles/common-styles';
+
+.rounded-toggle-group {
+  display: inline-flex;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.rounded-toggle {
+  border-radius: 50px;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+
+.mat-button-toggle-checked.rounded-toggle {
+  background-color: #3fb59f; /* Farbe für den aktiven Zustand */
+}
+
+.rounded-toggle-group .mat-button-toggle {
+  margin: 0;
+  border: none;
+}
+

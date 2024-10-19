@@ -10,6 +10,7 @@ import {CommunicationService} from "../service/communication.service";
 
 export class DateViewComponent implements OnInit {
 
+  showTime: boolean = true;
   startDate: Date | null = null;
   currentLocale: string | undefined;
 
@@ -26,16 +27,23 @@ export class DateViewComponent implements OnInit {
     this.communicationService.currentDate.subscribe((date: Date | null) => {
       this.startDate = date;
     });
+
+    this.communicationService.pickerType$.subscribe((pickerTye: 'date' | 'datetime') => {
+      this.showTime = pickerTye === 'datetime';
+    });
   }
 
   setCurrentDate() {
-    this.startDate = null;
+    this.startDate = null; ///????
     this.communicationService.setDate(new Date());
   }
 
   clearDate() {
     this.startDate = null;
     this.communicationService.setDate(null);
+  }
 
+  togglePickerType(): void {
+    this.communicationService.togglePickerType();
   }
 }

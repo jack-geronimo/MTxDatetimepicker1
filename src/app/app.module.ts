@@ -10,7 +10,6 @@ import {HomeComponent} from './home/home.component';
 import {FormComponent} from './datetimepicker/form.component';
 import {DateViewComponent} from './data-view/date-view.component';
 import {MatDialogModule} from "@angular/material/dialog";
-
 import { ChangelogService } from './service/changelog.service';
 import {LanguageService} from './service/LanguageService';
 import { LocalizedDatePipe } from './shared/localized-date.pipe';
@@ -47,7 +46,7 @@ registerLocaleData(localeEn);
     ReactiveFormsModule,
     MatDialogModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [
     ChangelogService,

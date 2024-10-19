@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangelogComponent } from '../changelog/changelog.component';
+import { ReleaseNoteComponent } from '../release-log/release-note.component';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +12,6 @@ export class HomeComponent {
   constructor(private readonly dialog: MatDialog) { }
 
   openChangelogDialog(): void {
-    this.dialog.open(ChangelogComponent);
+    this.dialog.open(ReleaseNoteComponent);
   }
 }

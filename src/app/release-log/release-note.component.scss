@@ -1,0 +1,43 @@
+.close-button{
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
+
+::ng-deep .mat-panel-title {
+  font-weight: bold !important;
+  color: #000000 !important;
+  font-size: 1.2rem !important;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .mat-panel-title::before {
+  content: '\e5c8'; /* Unicode for a material icon, e.g., 'info' */
+  font-family: 'Material Icons';
+  margin-right: 8px;
+}
+
+::ng-deep .release-node-content {
+  font-size: 1rem !important;
+  margin-top: 10px;
+}
+
+::ng-deep .release-node-content h3 {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  padding: 3px 0 3px 5px;
+  background-color: #f6f6f6;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .release-node-content h3::before {
+  content: 'check_circle';
+  font-family: 'Material Icons';
+  font-size: 24px;
+  color: #72a372;
+  margin-right: 8px;
+  vertical-align: middle;
+}
